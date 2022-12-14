@@ -1,0 +1,12 @@
+-- Para los tests de cada proyecto hay que hacer las siguientes instalaciones
+
+1. yarn add --dev babel-jest @babel/core @babel/preset-env
+2. yarn add --dev jest babel-jest @babel/preset-env @babel/preset-react 
+3. yarn add --dev @testing-library/react @types/jest jest-environment-jsdom
+4. yarn add --dev whatwg-fetch
+5. Crear un archivo en el root del proyecto nombrado babel.config.cjs
+
+-----------______________________________-------------_________________________________----------------------------__________________________
+
+
+
