@@ -11,7 +11,7 @@ export const CounterApp = ({value}) => {
     const handleAdd = () =>  {
         //console.log(event) =====> con esto se puede ver las propiedades del evento
         //setCounter(counter + 1)
-        setCounter((c) => c +1) 
+        setCounter((c) => c + 1) 
         // la eleccion de cualquiera de los 2 ultimos codigos depende de las circunstancias 
     } 
 
@@ -30,7 +30,7 @@ export const CounterApp = ({value}) => {
       <button onClick={ handleSubstrac }>
         -1
       </button>
-      <button onClick={handleReset}>
+      <button aria-label='btn-reset' onClick={handleReset}>
         Reset
       </button>
 

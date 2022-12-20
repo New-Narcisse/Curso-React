@@ -12,7 +12,7 @@ se coloca el codigo dentro de la siguinete etiqueta: <>..</>
 export const FirstApp = ({ title, subTitle, name }) => {
   return (
     <>
-      <h1> {title} </h1>
+      <h1 data-testid='test-title'> {title} </h1>
       <p> {subTitle} </p>
       <p> {name} </p>
     </>
@@ -29,6 +29,7 @@ FirstApp.propTypes = {
   title: PropTypes.string.isRequired,
 };
 FirstApp.defaultProps = {
+  title: 'Hola soy Sony',
   name: "Sony Narcisse",
   subTitle: "No hay sub titulos",
   //title: 'No hay titulos',
