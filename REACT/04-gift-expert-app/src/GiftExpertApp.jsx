@@ -3,7 +3,7 @@ import { AddCategory } from "./components/AddCategory";
 import { GiftGrid } from "./components/GiftGrid";
 
 export const GiftExpertApp = () => {
-  const [categories, setCategories] = useState(["One Punch", "Dragon Ball"]);
+  const [categories, setCategories] = useState(["Dragon Ball"]);
   // console.log(categories);
   const onAddCategory = (newCategory) => {
     /* esta funcion es para agregar lo que se me antoje a travez del boton de agregar o enter*/
