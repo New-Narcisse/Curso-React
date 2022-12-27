@@ -1,0 +1,45 @@
+--------------PASOS PARA CREAR LA APP DE LOS GIFTS------------------
+
+La idea es aterrisar todo lo que vimos en el curso hasta ahora
+
+
+******+++++++++++++++++++++++*********+******+++++++++++++++++++++++*********+******+++++++++++++++++++++++*********+******+++++++++++++++++++++++*********+
+
+
+1. Hacer cd en la carpeta del react. recuerda que todos los proyectos de react deben ir alli
+
+
+
+2. Ejecutar yarn crreate vite para crear el proyecto
+    - es para crear todos los folders de la app
+    NOTA: debemos nombrar correctamente los proyectos para su adecuada manipulacion
+
+3. en la carpeta main, borramos todo menos el main y luego creamos los componentes o functional component
+    - Hay que crear el componente de la app. generalmente lleva el nombre de la app y es .jsx xq lleva JS y HTML
+        + una vez creado el archivo esribimos rafc y luego tab para acceder el snipet
+        + borramos el mport y aplicamos las correciones, tambien hay que exportar
+        + en el return hay que colocar el titulo dentro de un fragmento  <> titulo </>
+        + en el main, renderizar el componente principal de la app osea el que acabamos de crear y obviamente hay que importar dicha app en l main
+
+4. correr la app 
+    - cd en la carpeta del proyecto
+    - ejecutar yarn o yarn isntall
+    - ejecutar yarn dev para ejecutar nuestra app en una local host dada por la terminal
+
+5. Desarrollo de la app 
+    - necesitamos un hook para mantener el estado: useState. e.g: const [categories, setCategories] = useState([valo incial(un string)])
+    NOTA: el o los valores del useState se encuentran en categories
+    - renderizar un listado basado en las categorias:
+        + recorrer  con .map todos los elementos de categories para poder retornarlos en una lista
+        {categories.map(category => {
+            return <li> category </li>
+        })}
+        cada li o elemento de la lista tiene q tener una key unica. y se agrega en en tag <li key={....}>elemento de la lista</li>
+    - agrgar nuvas categorias
+        + unsaremos setCategories para agregar categorias
+            const onAddCateory = (category) =>{
+                setCategories([...categories, category])
+            };
+        NOTA: todos los componentes aparte del componentApp deberian ir a una carpeta de componentes o components 
+        + cuando se crea una nueva app hay que invocarlo o colocarlo en el return del compnente principal App de esta forma
+            <nombreDelComponente />
