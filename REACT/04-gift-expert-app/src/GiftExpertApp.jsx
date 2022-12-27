@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AddCategory, GiftGrid } from "./components";
 
 export const GiftExpertApp = () => {
-  const [categories, setCategories] = useState(["One Punch"]);
+  const [categories, setCategories] = useState([""]);
   // console.log(categories);
   const onAddCategory = (newCategory) => {
     /* esta funcion es para agregar lo que se me antoje a travez del boton de agregar o enter*/
