@@ -29,3 +29,4 @@ export const AddCategory = ({ onNewCategory }) => {
         </form>
     )
 }
+
