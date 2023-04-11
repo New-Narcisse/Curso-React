@@ -1,0 +1,95 @@
+--------------------- - - - - - - Creando un proyecto con vite usando yarn, y con Bootstrap - - - - - - - --------------------
+1- yarn create vite
+        -colocar el nombre
+        -selectionar react
+        -selectionar javascript
+        -y listo
+
+2- borrar todos los archivos que no vamos a usar
+3- SE DEBE CREAR UN COMPONENTE APP Q ES EL Q VA A SER RENDERIZADO POR EL MAIN.JSX
+    puede ser: ProyrctoApp.jsx
+
+    NOTA: seria bueno crear de una vez la estructura de las carpetas. Mira en los otros proyectos para guiarte
+
+4- Se debe eliminar el contenido del archivo.css (index.css) y cambiar el nombre de dicho archivo a stle.css
+    Este archivo es para establecer estilos globales
+
+5- en el index.html, dentro del <head></head> a lo ultimo d¡se debe copiar el link de boostrap para los estilos:
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" 
+            integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+6- instalar el router con yarn react-router-dom@6
+7- importar el BrowserRoouter en el main y hacer lo siguiente:
+
+                    ReactDOM.createRoot(document.getElementById("root")).render(
+                      <React.StrictMode>
+                        <BrowserRouter>
+                          <ProyectoApp />
+                        </BrowserRouter>
+                      </React.StrictMode>
+                    );
+
+8- 
+
+
+
+
+
+
+
+
+
+
+
+
+    ---------------- - - - - - ALMACENAR EN EL LOCAL STORAGE- - - - - - -------------
+
+    1-  useEfect( () => {
+        localStorage.setItem( 'el estado q estamos supervisando', JSON.stringify( el estado q estamos supervisando ) )
+    }, [ el estado q estamos supervisando ] )
+
+        - Esto guradara el cambio de estado en el local store
+    
+    2- usar el tercer argumento del useReducer ( initializer (init) ) para iniciar el useReducer
+    3- antes y fuera del componente padre crear init
+        - const init = () => {
+            return JSON.parse(localStorage.getItem( 'el estado q estamos supervisando')) || [];
+        }
+
+        -la segunda parte del codigo es para q retorne un arreglo vacío en caso de que el JSON sea null
+
+
+        ----------- - - - - - - - - Borrar un todo- - - - - - - - - ---------------
+        1- en el reducer, crear el case de la manera siguiente. 
+            - case '[TODO] Remove todo':
+                return initialState.filter( todo => todo.id !== action.payload );
+
+        2- en el todoApp crear una funcion que haga referencia a la accion de borrar
+            - const handleDeleteTodo = (id) => {
+                dispatch({
+                     type: "[TODO] Remove todo",
+                     payload: id,
+                 });
+             };
+
+                ++ aqui usamos el id, xq en el reducer lo usamos (todo.id)
+                ++ aqui dispacheamos directamente el type y el payload sin tener q crear una constante action 
+                (con el type y el payload, para luego dispachear el action.)
+                ++ RECUERDA QUE PARA USAR EL DISPATCH, SE DEBE DESTRUCTURAR DEL USEREDUCER
+
+        3- pasar el handleDeleteTodo como props al componente que q renderiza las todos. En este caso se trata de TodoList
+            - <TodoList todos={todos} onDeleteTodo={handleDeleteTodo} />
+
+        4- colocar como props el onDeleteTodo dentro del componente TodoList y pasarlo como props a un component hijo de TodoList, 
+            en este caso TodoItem.
+                - {todos.map((todo) => (
+                    <TodoItems key={todo.id} todo={todo} onDeleteTodo={onDeleteTodo} />
+                  ))}
+
+        5- en el componente TodoItem buscar el boton, dentro de las props del boton colocar un onClick que contenga una function 
+        que mande a llamar el onDeleteTodo
+            - <button className="btn btn-danger" onClick={() => onDeleteTodo(todo.id)}>
+                Borrar
+              </button>
+            
+            -al onDeleteTodole mandamos el id
