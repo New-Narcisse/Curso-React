@@ -1,5 +1,5 @@
 
 
-export * from './RegistrPage';
+export * from './RegisterPage';
 export * from './LoginPage';
 
