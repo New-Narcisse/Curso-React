@@ -31,7 +31,7 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
         }}
       >
         <Toolbar>
-          <Typography variant="h6" noWarp component="div">
+          <Typography variant="h6" nowrap="true" component="div">
             SONY
           </Typography>
         </Toolbar>
