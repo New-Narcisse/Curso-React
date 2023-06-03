@@ -1,21 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { authSlice } from './auth';
   
 export const store = configureStore({
-
-    name: 'auht',
-    initialState: {
-        status: 'checking',
-        uid: null,
-        email: null,
-        displayName: null,
-        photoURL: null,
-        errorMessage: null,
-    },
-
     reducer: {
-        
-
+        auth: authSlice.reducer,
     },
-    
-
 });

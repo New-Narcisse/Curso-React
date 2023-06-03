@@ -17,6 +17,7 @@ export const pokemonSlice = createSlice({
             state.pokemons = action.payload.pokemons;
         }
 
+        
     }
     
 });
