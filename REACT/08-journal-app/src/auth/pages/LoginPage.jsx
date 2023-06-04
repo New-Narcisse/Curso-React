@@ -16,12 +16,11 @@ export const LoginPage = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log(event);
     dispatch(checkingAuthentication());
   };
 
   const onGoogleSubmit = () => {
-    console.log("onGoogleSubmit");
+
     dispatch(startGoogleSignIn());
   };
 
@@ -58,7 +57,7 @@ export const LoginPage = () => {
               </Button>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Button type="onGoogleSubmit" variant="contained" fullWidth>
+              <Button variant="contained" fullWidth onClick={onGoogleSubmit}>
                 <Google />
                 <Typography sx={{ ml: 1 }}>Google</Typography>
               </Button>
