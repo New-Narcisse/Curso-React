@@ -1,4 +1,5 @@
-import { signInWithGoogle } from "../../firebase/providers";
+
+import { singInWithGoogle } from "../../firebase/providers";
 import { checkingCredentials } from "./authSlice";
 
 
@@ -18,10 +19,9 @@ export const startGoogleSignIn = () => {
         
         dispatch(checkingCredentials());
 
-        const result = signInWithGoogle();
-        // console.log(result);
-        
+        const result = await singInWithGoogle();
 
     }
 };
+
 
