@@ -20,6 +20,9 @@ export const startGoogleSignIn = () => {
         dispatch(checkingCredentials());
 
         const result = await singInWithGoogle();
+        console.log(result);
+
+        
 
     }
 };
