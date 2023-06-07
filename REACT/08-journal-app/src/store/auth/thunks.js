@@ -1,6 +1,6 @@
 
-import { singInWithGoogle } from "../../firebase/providers";
-import { checkingCredentials } from "./authSlice";
+import { registerUserDirecFulfilment, singInWithGoogle } from "../../firebase/providers";
+import { checkingCredentials, login, logout } from "./authSlice";
 
 
 export const checkingAuthentication = () => {
@@ -20,9 +20,23 @@ export const startGoogleSignIn = () => {
         dispatch(checkingCredentials());
 
         const result = await singInWithGoogle();
-        console.log(result);
+        if (!result.ok) return dispatch(logout(result.errorMessage));
 
+        dispatch(login(result));
+
+    }
+};
+
+export const startCreatUserDirectFulfilment = (email, password, displayName) => {
+
+    return async (dispatch) => {
         
+        dispatch(checkingCredentials());
+
+        const { ok, uid, photoURL, errorMessage } = await registerUserDirecFulfilment(email, password, displayName);
+        if (!ok) return dispatch(logout({ errorMessage }));
+        
+        dispatch(login({ uid,email, displayName, photoURL }));
 
     }
 };
