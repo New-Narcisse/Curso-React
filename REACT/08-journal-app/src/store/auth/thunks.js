@@ -1,5 +1,5 @@
 
-import { registerUserDirecFulfilment, singInWithGoogle } from "../../firebase/providers";
+import { loginWithEmailPassword, registerUserDirecFulfilment, singInWithGoogle } from "../../firebase/providers";
 import { checkingCredentials, login, logout } from "./authSlice";
 
 
@@ -27,16 +27,31 @@ export const startGoogleSignIn = () => {
     }
 };
 
-export const startCreatUserDirectFulfilment = (email, password, displayName) => {
+export const startCreatUserDirectFulfilment = ({email, password, displayName}) => {
 
     return async (dispatch) => {
         
         dispatch(checkingCredentials());
 
-        const { ok, uid, photoURL, errorMessage } = await registerUserDirecFulfilment(email, password, displayName);
+        const { ok, uid, photoURL, errorMessage } = await registerUserDirecFulfilment({email, password, displayName});
         if (!ok) return dispatch(logout({ errorMessage }));
         
         dispatch(login({ uid,email, displayName, photoURL }));
+
+    }
+};
+
+export const startLoginWithEmailPassword = ({email, password}) => {
+
+    return async (dispatch) => {
+        
+        dispatch(checkingCredentials());
+
+        const { ok, displayNanem, uid, errorMessage } = await loginWithEmailPassword({ email, password});
+        if (!ok) return dispatch(logout({ errorMessage }));
+        
+        dispatch(login({ uid, email, password, displayNanem }));
+
 
     }
 };
