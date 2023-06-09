@@ -2,16 +2,26 @@ import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import { Google } from "@mui/icons-material";
-import { Alert, Button, Grid, Link, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { AuthLayout } from "../layout/AuthLayout";
 import { useForm } from "../../hooks";
-import { checkingAuthentication, startGoogleSignIn, startLoginWithEmailPassword } from "../../store/auth";
+import {
+  checkingAuthentication,
+  startGoogleSignIn,
+  startLoginWithEmailPassword,
+} from "../../store/auth";
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
 
   const { status, errorMessage } = useSelector((state) => state.auth);
-  
 
   const { email, password, onInputChange, formState } = useForm({
     email: "",
@@ -23,11 +33,10 @@ export const LoginPage = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     dispatch(checkingAuthentication());
-    dispatch(startLoginWithEmailPassword( formState ) );
+    dispatch(startLoginWithEmailPassword(formState));
   };
 
   const onGoogleSignIn = () => {
-    console.log("onGoogleSignIn");
     dispatch(startGoogleSignIn());
   };
 

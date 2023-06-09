@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { TurnedInNot } from "@mui/icons-material";
 import {
   Box,
@@ -14,8 +15,11 @@ import {
 } from "@mui/material";
 
 export const Sidebar = ({ drawerWidth = 240 }) => {
+  const { displayName } = useSelector((state) => state.auth);
+
   return (
     <Box
+      className=" animate__animated animate__backInLeft animate__fast "
       component="nav"
       sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
     >
@@ -32,7 +36,7 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
       >
         <Toolbar>
           <Typography variant="h6" nowrap="true" component="div">
-            SONY
+            {displayName}
           </Typography>
         </Toolbar>
         <Divider />

@@ -2,10 +2,13 @@ import { Box, ImageList, ImageListItem } from "@mui/material";
 
 export const ImageGallery = () => {
   return (
-    <Box sx={{ width: '100%' , height: 450, overflowY: "scroll" }}>
+    <Box sx={{ width: "100%", height: 450, overflowY: "scroll" }}>
       <ImageList variant="masonry" cols={3} gap={8}>
         {itemData.map((item) => (
-          <ImageListItem key={item.img}>
+          <ImageListItem
+            className=" animate__animated animate__fadeInUp animate__slow "
+            key={item.img}
+          >
             <img
               src={`${item.img}?w=248&fit=crop&auto=format`}
               srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}

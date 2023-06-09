@@ -1,13 +1,13 @@
 import { LogoutOutlined, MenuBookOutlined } from "@mui/icons-material";
 import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { starLogout } from "../../store/auth/thunks";
+import { startLogout } from "../../store/auth/thunks";
 
 export const Navbar = ({ drawerWidth = 240 }) => {
   const dispatch = useDispatch();
 
   const onLogout = () => {
-    dispatch(starLogout());
+    dispatch(startLogout());
   };
 
   return (
@@ -33,8 +33,8 @@ export const Navbar = ({ drawerWidth = 240 }) => {
           alignItems="center"
         >
           <Typography variant="h6" nowrap="true" component="div">
-            {" "}
-            JournalApp{" "}
+            
+            JournalApp
           </Typography>
 
           <IconButton onClick={onLogout} color="error">

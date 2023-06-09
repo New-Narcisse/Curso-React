@@ -11,12 +11,14 @@ export const useCheckauth = () => {
   const dispatch = useDispatch();
   const { status } = useSelector((state) => state.auth);
 
+
   useEffect(() => {
     onAuthStateChanged(FirebaseAuth, async (user) => {
       if (!user) return dispatch(logout());
 
       const { uid, displayName, email, photoURL } = user;
       dispatch(login(uid, displayName, email, photoURL));
+      
     });
   }, [])
     

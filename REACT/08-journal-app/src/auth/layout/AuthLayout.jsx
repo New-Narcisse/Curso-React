@@ -11,8 +11,9 @@ export const AuthLayout = ({ children, title = "" }) => {
       sx={{ minHeight: "100vh", backgroundColor: "primary.main", padding: 4 }}
     >
       <Grid
+        className=" animate__animated animate__backInLeft animate__fast "
         item
-        className="box-shadow"
+        // className="box-shadow"
         xs={3}
         sx={{
           width: { sm: 450 },
