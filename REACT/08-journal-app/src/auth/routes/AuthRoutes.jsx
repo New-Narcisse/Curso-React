@@ -4,9 +4,10 @@ import { LoginPage, RegisterPage } from "../pages";
 export const AuthRoutes = () => {
   return (
     <Routes>
-      <Route path="/*" element={<Navigate to="/auth/login" />} />
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
+      
+      <Route path="/*" element={<Navigate to="/auth/login" />} />
     </Routes>
   );
 };

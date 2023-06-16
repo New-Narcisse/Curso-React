@@ -5,11 +5,15 @@ import { JournalRoutes } from "../journal/routes/JournalRoutes";
 import { CheckingAuth } from "../ui";
 
 import { useCheckauth } from "../hooks";
+import { useSelector } from "react-redux";
 
 export const AppRouter = () => {
   const { status } = useCheckauth();
 
+  const { uid } = useSelector((state) => state.auth);
+  
   if (status === "checking") return <CheckingAuth />;
+  
 
   return (
     <Routes>

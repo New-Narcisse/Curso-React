@@ -38,27 +38,21 @@ export const singInWithGoogle = async() => {
 export const registerUserDirecFulfilment = async({ email, password, displayName }) => {
 
     try {
-        
-        const resp = await createUserWithEmailAndPassword(FirebaseAuth, email, password);
-        const {uid, photoURL } = resp.user 
-        
-       await updateProfile( FirebaseAuth.currentUser, {displayName} );
+        const resp = await createUserWithEmailAndPassword( FirebaseAuth, email, password );
+        const { uid, photoURL } = resp.user;
+
+        await updateProfile( FirebaseAuth.currentUser, { displayName });
+
         return {
             ok: true,
-            uid, email, photoURL, displayName
+            uid, photoURL, email, displayName
         }
 
     } catch (error) {
         console.log(error);
-
-        return {
-            ok: false,
-            errorMessage: error.message,
-
-        };
-
+        return { ok: false, errorMessage: error.message }
     }
-
+    
 }
 
 export const loginWithEmailPassword = async({ email, password }) => {
