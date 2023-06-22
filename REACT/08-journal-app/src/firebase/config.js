@@ -13,9 +13,11 @@ const firebaseConfig = {
   storageBucket: "curso-react-b176a.appspot.com",
   messagingSenderId: "540857813695",
   appId: "1:540857813695:web:282078d83ac526d8c2d40a"
+  
 };
 
 // Initialize Firebase
 export const FirebaseApp  = initializeApp(firebaseConfig);
 export const FirebaseAuth = getAuth( FirebaseApp );
-export const FirebaseDB   = getFirestore( FirebaseApp );
+export const FirebaseDB = getFirestore(FirebaseApp);
+

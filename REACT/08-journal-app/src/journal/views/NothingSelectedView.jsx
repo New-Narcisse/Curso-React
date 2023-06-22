@@ -18,7 +18,10 @@ export const NothingSelectedView = () => {
       }}
     >
       <Grid
-        className=" animate__animated animate__bounceIn animate__delay-2s	 animate__slow  "
+        className=" 
+        animate__animated 
+        animate__bounceIn animate__delay-1s	 
+        animate__slow animate__repeat-3 "
         item
         xs={12}
       >

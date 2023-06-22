@@ -1,26 +1,49 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { SaveAltOutlined } from "@mui/icons-material";
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import {
+  DeleteOutline,
+  SaveAltOutlined,
+  UploadOutlined,
+} from "@mui/icons-material";
+import {
+  Button,
+  Grid,
+  IconButton,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Swal from "sweetalert2";
-import "sweetalert2/dist/sweetalert2.css"
+import "sweetalert2/dist/sweetalert2.css";
 
 import { ImageGallery } from "./ImageGallery";
 import { useForm } from "../../hooks/useForm";
-import { setActiveNote, startSaveingNote } from "../../store/journal";
+import {
+  setActiveNote,
+  startDeletingNotes,
+  startSaveingNote,
+  startUploadingFiles,
+} from "../../store/journal";
+import moment from "moment";
 
 export const NoteView = () => {
   const dispatch = useDispatch();
-  const { active: note, messageSaved, isSaving } = useSelector((state) => state.journal);
+
+  const {
+    active: note,
+    messageSaved,
+    isSaving,
+  } = useSelector((state) => state.journal);
 
   const { body, title, date, onInputChange, formState } = useForm(note);
 
   const dateString = useMemo(() => {
-    const newDate = new Date(date);
+    const newDate = moment(date).format("MMMM Do YYYY, h:mm:ss a");
 
-    return newDate.toUTCString();
+    return newDate;
   }, [date]);
+
+  const fileInputRef = useRef();
 
   useEffect(() => {
     dispatch(setActiveNote(formState));
@@ -28,13 +51,21 @@ export const NoteView = () => {
 
   useEffect(() => {
     if (messageSaved.length > 0) {
-      Swal.fire("Nota actualizada", messageSaved, 'success');
+      Swal.fire("Nota actualizada", messageSaved, "success");
     }
   }, [messageSaved]);
-  
 
   const onSaveNote = () => {
     dispatch(startSaveingNote());
+  };
+
+  const onFileInputChange = ({ target }) => {
+    if (target.files === 0) return;
+    dispatch(startUploadingFiles(target.files));
+  };
+
+  const onDelete = () => {
+    dispatch(startDeletingNotes());
   };
 
   return (
@@ -43,14 +74,33 @@ export const NoteView = () => {
       direction="row"
       justifyContent="space-between"
       alignItems="center"
-      sx={{ mb: 1 }}
+      sx={{ mb: 1, fontFamily:'font-link' }}
+      className=" animate__animated animate__fadeInDown "
+
+      // className="font-link"
     >
       <Grid item>
-        <Typography fontSize={39} fontWeight="light">
+        <Typography fontSize={39} fontFamily={"font-link"} fontWeight="light">
           {dateString}
         </Typography>
       </Grid>
       <Grid item>
+        <input
+          ref={fileInputRef}
+          type="file"
+          multiple
+          onChange={onFileInputChange}
+          style={{ display: "none" }}
+        />
+
+        <IconButton
+          color="primary"
+          disabled={isSaving}
+          onClick={() => fileInputRef.current.click()}
+        >
+          <UploadOutlined />
+        </IconButton>
+
         <Button
           disabled={isSaving}
           onClick={onSaveNote}
@@ -73,6 +123,7 @@ export const NoteView = () => {
           value={title}
           onChange={onInputChange}
         />
+
         <TextField
           type="text"
           variant="filled"
@@ -81,11 +132,20 @@ export const NoteView = () => {
           placeholder="¿Que me cuentas hoy?"
           minRows={5}
           name="body"
+          // fontFamily={"font-link"}
           value={body}
           onChange={onInputChange}
+
         />
       </Grid>
-      <ImageGallery />
+
+      <Grid container justifyContent="end">
+        <Button onClick={onDelete} sx={{ mt: 2 }} color="error">
+          <DeleteOutline />
+          Borrar
+        </Button>
+      </Grid>
+      <ImageGallery images={note.imageUrls} />
     </Grid>
   );
 };

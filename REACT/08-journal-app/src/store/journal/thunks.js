@@ -1,15 +1,18 @@
-import { collection, doc, setDoc } from "firebase/firestore/lite";
+import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
 
 import {
     addNewEmptyNote,
+    deletNoteById,
     savingNewNote,
     setActiveNote,
     setNotes,
+    setPhotosToActiveNotes,
     setSaving,
     updateNote
 } from "./journalSlice";
 import { loadNotes } from "../../helpers/loadNotes";
+import { fileUpload } from "../../helpers/file.Upload";
 
 
 
@@ -68,5 +71,39 @@ export const startSaveingNote = () => {
         await setDoc(docRef, noteToFireStore, { merge: true });
 
         dispatch(updateNote(note));
+    }
+}
+
+export const startUploadingFiles = (files = []) => {
+    return async (dispatch) => {
+        dispatch(setSaving());
+        // await fileUpload(files[0]);
+
+        const fileUploadPromises = [];
+
+        for (const file of files) {
+            fileUploadPromises.push( fileUpload(file) )
+        }
+
+        const photosUrls = await Promise.all(fileUploadPromises);
+
+
+        dispatch( setPhotosToActiveNotes( photosUrls ) )
+
+    }
+}
+
+export const startDeletingNotes = () => {
+    return async (dispatch, getState) => {
+
+        const { uid } = getState().auth;
+        const { active: note } = getState().journal;
+
+        const docRef = doc(FirebaseDB, `${uid}/joournal/notes/{note.id}`);
+        await deleteDoc( docRef )
+
+
+        dispatch(deletNoteById(note.id));
+        
     }
 }

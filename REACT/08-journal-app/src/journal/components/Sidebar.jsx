@@ -26,7 +26,12 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
         }}
       >
         <Toolbar>
-          <Typography variant="h6" nowrap="true" component="div">
+          <Typography
+            variant="h6"
+            nowrap="true"
+            component="div"
+            fontFamily={"font-link"}
+          >
             {displayName}
           </Typography>
         </Toolbar>

@@ -22,11 +22,9 @@ const formData = {
   password: "",
 };
 
-
 export const LoginPage = () => {
   const { status, errorMessage } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
 
   const { email, password, onInputChange } = useForm(formData);
 
@@ -35,7 +33,7 @@ export const LoginPage = () => {
   const onSubmit = (event) => {
     event.preventDefault();
 
-    dispatch(startLoginWithEmailPassword(email, password));
+    dispatch(startLoginWithEmailPassword({ email, password }));
   };
 
   const onGoogleSignIn = () => {

@@ -39,6 +39,7 @@ export const JournalPage = () => {
           right: 50,
           bottom: 50,
         }}
+        className=" animate__animated animate__heartBeat animate__delay-1s animate__slow animate__repeat-3 "
       >
         <AddOutlined sx={{ fontSize: 30 }} />
       </IconButton>
